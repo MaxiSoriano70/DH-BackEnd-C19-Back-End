@@ -1,0 +1,306 @@
+:root {
+    --color-1: #223d58;
+    --color-2: #3e6389;
+    --color-3: #6e94b9;
+    --color-4: #b1d1f1;
+    --color-5: #1c7373;
+    --color-6: #005757;
+    --color-7: #b45908;
+    --color-8: #ab5408;
+    --color-fondo: #eaeef4;
+    --color-complementario-I : #ce1d49;
+    --color-complementario-II : #b81941;
+    --color-success: #28a745;
+    --color-warning: #ffc107;
+    --color-danger: #dc3545;
+    --color-blanco: #fff;
+    --color-negro: #000;
+}
+
+.tus-mascotas{
+    width: 100%;
+    padding: 10px 20px;
+    margin: 20px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.tus-mascotas .tus-mascotas-titulo{
+    margin-bottom: 10px;
+}
+
+.tus-mascotas .tus-mascotas-titulo h2{
+    text-transform: uppercase;
+}
+
+.tus-mascotas .agregar-mascota{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.tus-mascotas .contenedor-mascotas{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.contenedor-mascotas .card{
+    position: relative;
+    width: 300px;
+    height: 350px;
+    border-radius: 15px;
+    box-shadow: 2px 3px 5px rgba(73, 69, 52, 0.4);
+    margin: 10px 10px;
+}
+
+.contenedor-mascotas .card .btn-eliminar-mascota{
+    all: unset;
+    position: absolute;
+    color: var(--color-blanco);
+    top: 5px;
+    right: 10px;
+    font-size: 1.5rem;
+    margin: 0;
+    cursor: pointer;
+}
+
+.contenedor-mascotas .card .btn-eliminar-mascota:hover{
+    color: var(--color-fondo);
+    transition: 0.2s linear;
+}
+
+.contenedor-mascotas .card .contenido{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    text-align: center;
+    padding: 20px;
+}
+
+.contenedor-mascotas .card .contenido .img-pet{
+    height: 50%;
+    margin-bottom: 20px;
+}
+
+.contenedor-mascotas .card .contenido .img-pet img{
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    aspect-ratio: 16/9;
+}
+
+.contenedor-mascotas .card .contenido span.perro{
+    position: absolute;
+    width: 400px;
+    height: 200px;
+    background: linear-gradient(to right, var(--color-1), var(--color-2));
+    transform: rotate(-25deg);
+    top: -50px;
+    left: -100px;
+}
+
+.contenedor-mascotas .card .contenido span.gato{
+    position: absolute;
+    width: 400px;
+    height: 200px;
+    background: linear-gradient(to right, var(--color-complementario-I), var(--color-complementario-II));
+    transform: rotate(-25deg);
+    top: -50px;
+    left: -100px;
+}
+
+.contenedor-mascotas .card .contenido h4{
+    font-weight: bold;
+    margin: 10px 0px;
+}
+
+.contenedor-mascotas .card .contenido h5.al-dia{
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: var(--color-success);
+}
+
+.contenedor-mascotas .card .contenido h5.faltante{
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: var(--color-danger);
+}
+
+.contenedor-mascotas .card .contenido .botones-mascotas{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 20px 0px;
+}
+
+.contenedor-mascotas .card .contenido .botones-mascotas .btn-carnet{
+    text-transform: capitalize;
+    font-size: 1rem;
+    background-color: var(--color-5);
+    color: var(--color-blanco);
+    border: none;
+    padding: 10px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.contenedor-mascotas .card .contenido .botones-mascotas .btn-carnet:hover{
+    background-color: var(--color-6);
+    transition: 0.2s linear;
+}
+
+.contenedor-mascotas .card .contenido .botones-mascotas .btn-editar-mascota{
+    text-transform: capitalize;
+    font-size: 1rem;
+    background-color: var(--color-7);
+    color: var(--color-blanco);
+    border: none;
+    padding: 10px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.contenedor-mascotas .card .contenido .botones-mascotas .btn-editar-mascota:hover{
+    background-color: var(--color-8);
+    transition: 0.2s linear;
+}
+
+@media (max-width:700px){
+    .tus-mascotas{
+        padding: 10px;
+    }
+
+    .contenedor-mascotas .card{
+        width: 250px;
+        height: auto;
+    }
+
+    .contenedor-mascotas .card .contenido{
+        padding: 10px;
+    }
+
+    .contenedor-mascotas .card .contenido .img-pet{
+        height: 40%;
+        margin-bottom: 10px;
+    }
+
+    .contenedor-mascotas .card .contenido .img-pet img{
+        width: 100px;
+        height: 100px;
+    }
+
+    .contenedor-mascotas .card .contenido span.perro{
+        width: 350px;
+        height: 200px;
+        top: -85px;
+    }
+
+    .contenedor-mascotas .card .contenido span.gato{
+        width: 350px;
+        height: 200px;
+        top: -85px;
+    }
+
+    .contenedor-mascotas .card .contenido h5.al-dia{
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+
+    .contenedor-mascotas .card .contenido h5.faltante{
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+
+    .contenedor-mascotas .card .contenido .botones-mascotas{
+        flex-direction: column;
+        padding: 5px 0px;
+    }
+
+    .contenedor-mascotas .card .contenido .botones-mascotas .btn-carnet{
+        font-size: 0.8rem;
+        margin: 5px 0px;
+    }
+
+    .contenedor-mascotas .card .contenido .botones-mascotas .btn-editar-mascota{
+        font-size: 0.8rem;
+        margin: 5px 0px;
+    }
+}
+
+@media (max-width:560px){
+    .contenedor-mascotas .card{
+        width: 200px;
+    }
+
+    .contenedor-mascotas .card .contenido span.perro{
+        width: 300px;
+        height: 200px;
+        top: -100px;
+    }
+
+    .contenedor-mascotas .card .contenido span.gato{
+        width: 300px;
+        height: 200px;
+        top: -100px;
+    }
+}
+
+@media (max-width:460px){
+    .contenedor-mascotas .card{
+        width: 80%;
+    }
+
+    .contenedor-mascotas .card .contenido h4{
+        margin: 15px 0px 10px 0px;
+    }
+
+    .contenedor-mascotas .card .contenido span.perro{
+        width: 100%;
+        height: 210px;
+        top: -90px;
+        left: 0;
+        transform: rotate(0deg);
+    }
+
+    .contenedor-mascotas .card .contenido span.gato{
+        width: 100%;
+        height: 210px;
+        top: -90px;
+        left: 0;
+        transform: rotate(0deg);
+    }
+
+    .contenedor-mascotas .card .contenido .botones-mascotas{
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .contenedor-mascotas .card .contenido .botones-mascotas .btn-carnet{
+        margin: 5px;
+    }
+
+    .contenedor-mascotas .card .contenido .botones-mascotas .btn-editar-mascota{
+        margin: 5px;
+    }
+}

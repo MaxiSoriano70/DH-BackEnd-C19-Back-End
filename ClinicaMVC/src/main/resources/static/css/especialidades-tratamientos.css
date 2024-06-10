@@ -1,0 +1,92 @@
+:root {
+    --color-1: #223d58;
+    --color-2: #3e6389;
+    --color-3: #6e94b9;
+    --color-4: #b1d1f1;
+    --color-5: #1c7373;
+    --color-6: #005757;
+    --color-7: #b45908;
+    --color-8: #ab5408;
+    --color-fondo: #eaeef4;
+    --color-complementario-I : #ce1d49;
+    --color-complementario-II : #b81941;
+    --color-success: #28a745;
+    --color-warning: #ffc107;
+    --color-danger: #dc3545;
+    --color-blanco: #fff;
+    --color-negro: #000;
+}
+
+.especialidades{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 20px 0px;
+}
+
+.especialidades .especialidades-titulo{
+    margin-bottom: 10px;
+}
+
+.especialidades-titulo h2{
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.especialidades .contenedor-especialidades{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.contenedor-especialidades .card-especialidad{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: column;
+    width: 250px;
+    height: 350px;
+    margin: 15px 10px;
+}
+
+.card-especialidad img{
+    width: 200px;
+    height: 200px;
+}
+
+.card-especialidad h5{
+    font-weight: bold;
+    text-align: center;
+}
+
+.card-especialidad p{
+    text-align: center;
+    font-size: 1rem;
+}
+
+
+
+@media (max-width:650px) {
+    .contenedor-especialidades .card-especialidad{
+        width: 150px;
+        height: 250px;
+        margin: 10px 5px;
+    }
+
+    .card-especialidad img{
+        width: 100px;
+        height: 100px;
+    }
+
+    .card-especialidad h5{
+        font-size: 1rem;
+
+    }
+
+    .card-especialidad p{
+        font-size: 0.8rem;
+    }
+}
