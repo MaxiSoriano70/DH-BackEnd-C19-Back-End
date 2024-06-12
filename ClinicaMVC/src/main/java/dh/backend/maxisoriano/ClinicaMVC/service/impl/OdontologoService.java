@@ -1,49 +1,41 @@
 package dh.backend.maxisoriano.ClinicaMVC.service.impl;
 
-
-
-import dh.backend.maxisoriano.ClinicaMVC.dao.IDao;
-import dh.backend.maxisoriano.ClinicaMVC.model.Odontologo;
+import dh.backend.maxisoriano.ClinicaMVC.entity.Odontologo;
+import dh.backend.maxisoriano.ClinicaMVC.repository.IOdontologoRepository;
 import dh.backend.maxisoriano.ClinicaMVC.service.IOdontologoService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OdontologoService implements IOdontologoService {
-    private IDao<Odontologo> odontologoIDao;
-
-    public OdontologoService(IDao<Odontologo> odontologoIDao) {
-        this.odontologoIDao = odontologoIDao;
+    private IOdontologoRepository odontologoRepository;
+    public OdontologoService(IOdontologoRepository odontologoRepository) {
+        this.odontologoRepository = odontologoRepository;
     }
-
-    public Odontologo crearOdontologo(Odontologo odontologo){
-        return odontologoIDao.registrar(odontologo);
-    }
-
-
     @Override
     public Odontologo registrarOdontologo(Odontologo odontologo) {
-        return this.odontologoIDao.registrar(odontologo);
+        return this.odontologoRepository.save(odontologo);
     }
 
     @Override
-    public Odontologo buscarPorId(int id) {
-        return this.odontologoIDao.buscarPorId(id);
+    public Optional<Odontologo> buscarPorId(int id) {
+        return this.odontologoRepository.findById(id);
     }
 
     @Override
     public List<Odontologo> buscarTodos() {
-        return this.odontologoIDao.buscarTodos();
+        return this.odontologoRepository.findAll();
     }
 
     @Override
     public void actualizarOdontologo(Odontologo odontologo) {
-        this.odontologoIDao.actualizar(odontologo);
+        this.odontologoRepository.save(odontologo);
     }
 
     @Override
     public void eliminarOdontologo(Integer id) {
-        this.odontologoIDao.eliminar(id);
+        this.odontologoRepository.deleteById(id);
     }
 }

@@ -1,12 +1,13 @@
 package dh.backend.maxisoriano.ClinicaMVC.controller;
 
-import dh.backend.maxisoriano.ClinicaMVC.model.Odontologo;
+import dh.backend.maxisoriano.ClinicaMVC.entity.Odontologo;
 import dh.backend.maxisoriano.ClinicaMVC.service.IOdontologoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/odontologo")
@@ -30,9 +31,10 @@ public class OdontologoController {
     }
     @GetMapping("/{id}")
     public ResponseEntity<Odontologo> buscarOdontologoPorId(@PathVariable Integer id){
-        Odontologo odontologo = odontologoService.buscarPorId(id);
-        if(odontologo != null){
-            return ResponseEntity.ok(odontologo);
+        Optional<Odontologo> odontologo = odontologoService.buscarPorId(id);
+        if(odontologo.isPresent()){
+            Odontologo odontologoARetornar = odontologo.get();
+            return ResponseEntity.ok(odontologoARetornar);
         }
         else{
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -40,21 +42,23 @@ public class OdontologoController {
     }
     @PutMapping
     public ResponseEntity<String> actualizarOdontologo(@RequestBody Odontologo odontologo){
-        if (odontologoService.buscarPorId(odontologo.getId()) == null) {
-            return new ResponseEntity<>("{\"message\": \"odontologo no encontrado\"}", HttpStatus.NOT_FOUND);
-        } else {
+        Optional<Odontologo> odontologoOptional = odontologoService.buscarPorId(odontologo.getId());
+        if (odontologoOptional.isPresent()) {
             odontologoService.actualizarOdontologo(odontologo);
             return ResponseEntity.ok("{\"message\": \"odontologo modificado\"}");
+        } else {
+            return new ResponseEntity<>("{\"message\": \"odontologo no encontrado\"}", HttpStatus.NOT_FOUND);
         }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> borrarOdontologo(@PathVariable Integer id){
-        if (odontologoService.buscarPorId(id) == null) {
-            return new ResponseEntity<>("{\"message\": \"odontologo no encontrado\"}", HttpStatus.NOT_FOUND);
-        } else {
+        Optional<Odontologo> odontologoOptional = odontologoService.buscarPorId(id);
+        if (odontologoOptional.isPresent()) {
             odontologoService.eliminarOdontologo(id);
             return ResponseEntity.ok("{\"message\": \"odontologo eliminado\"}");
+        } else {
+            return new ResponseEntity<>("{\"message\": \"odontologo no encontrado\"}", HttpStatus.NOT_FOUND);
         }
     }
 }
