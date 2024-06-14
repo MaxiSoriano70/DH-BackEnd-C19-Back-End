@@ -10,7 +10,7 @@ public interface IOdontologoService {
     Odontologo registrarOdontologo(Odontologo odontologo);
     Optional<Odontologo> buscarPorId(int id);
     List<Odontologo> buscarTodos();
-    void actualizarOdontologo(Odontologo odontologo);
+    Odontologo actualizarOdontologo(Odontologo odontologo);
     void eliminarOdontologo(Integer id) throws ResourceNotFoundException;
     List<Odontologo> buscarPorApellido(String apellido);
     List<Odontologo> buscarPorNombre(String nombre);

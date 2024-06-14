@@ -4,8 +4,6 @@ import dh.backend.maxisoriano.ClinicaMVC.entity.Odontologo;
 import dh.backend.maxisoriano.ClinicaMVC.exception.ResourceNotFoundException;
 import dh.backend.maxisoriano.ClinicaMVC.repository.IOdontologoRepository;
 import dh.backend.maxisoriano.ClinicaMVC.service.IOdontologoService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,8 +31,9 @@ public class OdontologoService implements IOdontologoService {
     }
 
     @Override
-    public void actualizarOdontologo(Odontologo odontologo) {
+    public Odontologo actualizarOdontologo(Odontologo odontologo) {
         this.odontologoRepository.save(odontologo);
+        return odontologo;
     }
 
     @Override
