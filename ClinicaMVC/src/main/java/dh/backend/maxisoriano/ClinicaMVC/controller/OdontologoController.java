@@ -1,6 +1,7 @@
 package dh.backend.maxisoriano.ClinicaMVC.controller;
 
 import dh.backend.maxisoriano.ClinicaMVC.entity.Odontologo;
+import dh.backend.maxisoriano.ClinicaMVC.exception.ResourceNotFoundException;
 import dh.backend.maxisoriano.ClinicaMVC.service.IOdontologoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,15 +51,28 @@ public class OdontologoController {
             return new ResponseEntity<>("{\"message\": \"odontologo no encontrado\"}", HttpStatus.NOT_FOUND);
         }
     }
-
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> borrarOdontologo(@PathVariable Integer id){
-        Optional<Odontologo> odontologoOptional = odontologoService.buscarPorId(id);
-        if (odontologoOptional.isPresent()) {
-            odontologoService.eliminarOdontologo(id);
-            return ResponseEntity.ok("{\"message\": \"odontologo eliminado\"}");
-        } else {
-            return new ResponseEntity<>("{\"message\": \"odontologo no encontrado\"}", HttpStatus.NOT_FOUND);
+    public ResponseEntity<String> borrarOdontologo(@PathVariable Integer id) throws ResourceNotFoundException {
+        odontologoService.eliminarOdontologo(id);
+        return ResponseEntity.ok("{\"message\": \"odontologo eliminado\"}");
+    }
+    @GetMapping("/apellido/{apellido}")
+    public ResponseEntity<List<Odontologo>> buscarPorApellido(@PathVariable String apellido){
+        List<Odontologo> listaOdontologos = odontologoService.buscarPorApellido(apellido);
+        if(listaOdontologos.size()>0){
+            return  ResponseEntity.ok(listaOdontologos);
+        }else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
+    @GetMapping("/nombre/{nombre}")
+    public ResponseEntity<List<Odontologo>> buscarPorNombre(@PathVariable String nombre){
+        List<Odontologo> listaOdontologos = odontologoService.buscarPorNombre(nombre);
+        if(listaOdontologos.size()>0){
+            return  ResponseEntity.ok(listaOdontologos);
+        }else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 }

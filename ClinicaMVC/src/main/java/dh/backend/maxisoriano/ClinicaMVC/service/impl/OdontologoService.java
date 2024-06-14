@@ -1,8 +1,11 @@
 package dh.backend.maxisoriano.ClinicaMVC.service.impl;
 
 import dh.backend.maxisoriano.ClinicaMVC.entity.Odontologo;
+import dh.backend.maxisoriano.ClinicaMVC.exception.ResourceNotFoundException;
 import dh.backend.maxisoriano.ClinicaMVC.repository.IOdontologoRepository;
 import dh.backend.maxisoriano.ClinicaMVC.service.IOdontologoService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,7 +38,23 @@ public class OdontologoService implements IOdontologoService {
     }
 
     @Override
-    public void eliminarOdontologo(Integer id) {
-        this.odontologoRepository.deleteById(id);
+    public void eliminarOdontologo(Integer id) throws ResourceNotFoundException {
+        Optional<Odontologo> odontologoOptional = this.buscarPorId(id);
+        if (odontologoOptional.isPresent()) {
+            this.odontologoRepository.deleteById(id);
+        } else {
+            throw new ResourceNotFoundException("{\"message\": \"odontologo no encontrado\"}");
+        }
+
+    }
+
+    @Override
+    public List<Odontologo> buscarPorApellido(String apellido) {
+        return odontologoRepository.buscarPorApellido(apellido);
+    }
+
+    @Override
+    public List<Odontologo> buscarPorNombre(String nombre) {
+        return odontologoRepository.findByNombreLike(nombre);
     }
 }

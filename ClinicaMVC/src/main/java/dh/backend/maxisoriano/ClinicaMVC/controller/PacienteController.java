@@ -3,6 +3,7 @@ package dh.backend.maxisoriano.ClinicaMVC.controller;
 
 import dh.backend.maxisoriano.ClinicaMVC.entity.Odontologo;
 import dh.backend.maxisoriano.ClinicaMVC.entity.Paciente;
+import dh.backend.maxisoriano.ClinicaMVC.exception.ResourceNotFoundException;
 import dh.backend.maxisoriano.ClinicaMVC.service.IPacienteService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -56,13 +57,28 @@ public class PacienteController {
         }
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> borrarPaciente(@PathVariable Integer id){
-        Optional<Paciente> pacienteOptional = pacienteService.buscarPorId(id);
-        if (pacienteOptional.isPresent()) {
-            pacienteService.eliminarPaciente(id);
-            return ResponseEntity.ok("{\"message\": \"Paciente eliminado\"}");
-        } else {
-            return new ResponseEntity<>("{\"message\": \"Paciente no eliminado\"}", HttpStatus.NOT_FOUND);
+    public ResponseEntity<String> borrarPaciente(@PathVariable Integer id) throws ResourceNotFoundException {
+        pacienteService.eliminarPaciente(id);
+        return ResponseEntity.ok("{\"message\": \"Paciente eliminado\"}");
+    }
+
+    @GetMapping("/dni/{dni}")
+    public ResponseEntity<List<Paciente>> buscarPorDni(@PathVariable String dni){
+        List<Paciente> listaPacientes = pacienteService.buscarPorDni(dni);
+        if(listaPacientes.size()>0){
+            return  ResponseEntity.ok(listaPacientes);
+        }else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
+    @GetMapping("/provincia/{provincia}")
+    public ResponseEntity<List<Paciente>> buscarPorProvincia(@PathVariable String provincia){
+        List<Paciente> listaPacientes = pacienteService.buscarPorProvincia(provincia);
+        if(listaPacientes.size()>0){
+            return  ResponseEntity.ok(listaPacientes);
+        }else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 }
