@@ -34,11 +34,12 @@ class IOdontologoServiceTest {
    }
 
     @Test
-    @DisplayName(" Testear que el odontolo fue editado")
+    @DisplayName(" Testear que el odontologo fue editado")
     void testOdontoloEditado(){
        Odontologo odontologDesdeLaBd = odontologoService.actualizarOdontologo(odontologo);
        assertNotNull(odontologDesdeLaBd);
     }
+
 
 }
 
