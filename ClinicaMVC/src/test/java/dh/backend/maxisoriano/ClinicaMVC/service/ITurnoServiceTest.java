@@ -6,6 +6,7 @@ import dh.backend.maxisoriano.ClinicaMVC.entity.Domicilio;
 import dh.backend.maxisoriano.ClinicaMVC.entity.Odontologo;
 import dh.backend.maxisoriano.ClinicaMVC.entity.Paciente;
 import dh.backend.maxisoriano.ClinicaMVC.entity.Turno;
+import dh.backend.maxisoriano.ClinicaMVC.exception.BadRequestException;
 import dh.backend.maxisoriano.ClinicaMVC.service.impl.OdontologoService;
 import dh.backend.maxisoriano.ClinicaMVC.service.impl.PacienteService;
 import dh.backend.maxisoriano.ClinicaMVC.service.impl.TurnoService;
@@ -37,6 +38,7 @@ class ITurnoServiceTest {
   private Odontologo odontologo;
 
 
+
     @BeforeEach
     void SetUp(){
         paciente = new Paciente();
@@ -59,11 +61,11 @@ class ITurnoServiceTest {
         turnoRequestDto= new TurnoRequestDto();
         turnoRequestDto.setOdontologo_id(1);
         turnoRequestDto.setPaciente_id(2);
-        turnoRequestDto.setFecha("24-08-2024");
+        turnoRequestDto.setFecha("2024-08-24");
     }
     @Test
     @DisplayName("Testear que un turno fue guardado")
-    void testTurnoGuardado(){
+    void testTurnoGuardado() throws BadRequestException {
         TurnoResponseDto turnoGuardadoEnLaBd = turnoService.registrar(turnoRequestDto);
         assertNotNull(turnoGuardadoEnLaBd);
     }
