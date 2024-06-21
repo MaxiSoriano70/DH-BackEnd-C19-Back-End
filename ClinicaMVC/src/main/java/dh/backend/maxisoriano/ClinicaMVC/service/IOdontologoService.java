@@ -1,16 +1,17 @@
 package dh.backend.maxisoriano.ClinicaMVC.service;
 
 import dh.backend.maxisoriano.ClinicaMVC.entity.Odontologo;
+import dh.backend.maxisoriano.ClinicaMVC.exception.BadRequestException;
 import dh.backend.maxisoriano.ClinicaMVC.exception.ResourceNotFoundException;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface IOdontologoService {
-    Odontologo registrarOdontologo(Odontologo odontologo);
-    Optional<Odontologo> buscarPorId(int id);
+    Odontologo registrarOdontologo(Odontologo odontologo) throws BadRequestException;
+    Optional<Odontologo> buscarPorId(int id) throws ResourceNotFoundException;
     List<Odontologo> buscarTodos();
-    Odontologo actualizarOdontologo(Odontologo odontologo);
+    void actualizarOdontologo(Odontologo odontologo) throws ResourceNotFoundException;
     void eliminarOdontologo(Integer id) throws ResourceNotFoundException;
     List<Odontologo> buscarPorApellido(String apellido);
     List<Odontologo> buscarPorNombre(String nombre);

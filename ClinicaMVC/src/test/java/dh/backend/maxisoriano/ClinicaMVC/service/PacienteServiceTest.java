@@ -2,6 +2,8 @@ package dh.backend.maxisoriano.ClinicaMVC.service;
 
 import dh.backend.maxisoriano.ClinicaMVC.entity.Domicilio;
 import dh.backend.maxisoriano.ClinicaMVC.entity.Paciente;
+import dh.backend.maxisoriano.ClinicaMVC.exception.BadRequestException;
+import dh.backend.maxisoriano.ClinicaMVC.exception.ResourceNotFoundException;
 import dh.backend.maxisoriano.ClinicaMVC.service.impl.PacienteService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -42,7 +44,7 @@ class PacienteServiceTest {
 
     @Test
     @DisplayName("Testear que un paciente fue guardado")
-    void testPacienteGuardado(){
+    void testPacienteGuardado() throws BadRequestException {
         Paciente pacienteDesdeLaBD = pacienteService.registrarPaciente(paciente);
 
         assertNotNull(pacienteDesdeLaBD);
@@ -50,7 +52,7 @@ class PacienteServiceTest {
 
     @Test
     @DisplayName("Testear busqueda paciente por id")
-    void testPacientePorId(){
+    void testPacientePorId() throws ResourceNotFoundException {
         Integer id = 1;
         Optional<Paciente> pacienteEncontrado = pacienteService.buscarPorId(id);
         Paciente paciente1 = pacienteEncontrado.get();
@@ -60,7 +62,7 @@ class PacienteServiceTest {
 
     @Test
     @DisplayName("Testear busqueda todos los pacientes")
-    void testBusquedaTodos() {
+    void testBusquedaTodos() throws ResourceNotFoundException {
 
         List<Paciente> pacientes = pacienteService.buscarTodos();
 

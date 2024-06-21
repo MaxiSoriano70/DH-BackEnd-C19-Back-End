@@ -1,6 +1,7 @@
 package dh.backend.maxisoriano.ClinicaMVC.controller;
 
 import dh.backend.maxisoriano.ClinicaMVC.entity.Odontologo;
+import dh.backend.maxisoriano.ClinicaMVC.exception.BadRequestException;
 import dh.backend.maxisoriano.ClinicaMVC.exception.ResourceNotFoundException;
 import dh.backend.maxisoriano.ClinicaMVC.service.IOdontologoService;
 import org.springframework.http.HttpStatus;
@@ -18,38 +19,22 @@ public class OdontologoController {
         this.odontologoService = odontologoService;
     }
     @PostMapping
-    public ResponseEntity<Odontologo> registrarOdontologo(@RequestBody Odontologo odontologo){
-        Odontologo odontologoARetornar = odontologoService.registrarOdontologo(odontologo);
-        if(odontologoARetornar == null){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }else {
-            return ResponseEntity.status(HttpStatus.CREATED).body(odontologoARetornar);
-        }
+    public ResponseEntity<Odontologo> registrarOdontologo(@RequestBody Odontologo odontologo) throws BadRequestException{
+        return ResponseEntity.status(HttpStatus.CREATED).body(odontologoService.registrarOdontologo(odontologo));
     }
     @GetMapping
     public ResponseEntity<List<Odontologo>> buscarTodos(){
         return ResponseEntity.ok(odontologoService.buscarTodos());
     }
     @GetMapping("/{id}")
-    public ResponseEntity<Odontologo> buscarOdontologoPorId(@PathVariable Integer id){
+    public ResponseEntity<Odontologo> buscarOdontologoPorId(@PathVariable Integer id) throws ResourceNotFoundException {
         Optional<Odontologo> odontologo = odontologoService.buscarPorId(id);
-        if(odontologo.isPresent()){
-            Odontologo odontologoARetornar = odontologo.get();
-            return ResponseEntity.ok(odontologoARetornar);
-        }
-        else{
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }
+        return ResponseEntity.ok(odontologo.get());
     }
     @PutMapping
-    public ResponseEntity<String> actualizarOdontologo(@RequestBody Odontologo odontologo){
-        Optional<Odontologo> odontologoOptional = odontologoService.buscarPorId(odontologo.getId());
-        if (odontologoOptional.isPresent()) {
-            odontologoService.actualizarOdontologo(odontologo);
-            return ResponseEntity.ok("{\"message\": \"odontologo modificado\"}");
-        } else {
-            return new ResponseEntity<>("{\"message\": \"odontologo no encontrado\"}", HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<String> actualizarOdontologo(@RequestBody Odontologo odontologo) throws ResourceNotFoundException {
+        odontologoService.actualizarOdontologo(odontologo);
+        return ResponseEntity.ok("{\"message\": \"odontologo modificado\"}");
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<String> borrarOdontologo(@PathVariable Integer id) throws ResourceNotFoundException {

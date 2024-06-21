@@ -3,6 +3,7 @@ package dh.backend.maxisoriano.ClinicaMVC.controller;
 
 import dh.backend.maxisoriano.ClinicaMVC.entity.Odontologo;
 import dh.backend.maxisoriano.ClinicaMVC.entity.Paciente;
+import dh.backend.maxisoriano.ClinicaMVC.exception.ResourceNotFoundException;
 import dh.backend.maxisoriano.ClinicaMVC.service.IOdontologoService;
 import dh.backend.maxisoriano.ClinicaMVC.service.IPacienteService;
 import org.springframework.stereotype.Controller;
@@ -25,7 +26,7 @@ public class VistaController {
     }
 
     @GetMapping("/buscarPaciente")
-    public String buscarPacientePorId(Model model, @RequestParam Integer id){
+    public String buscarPacientePorId(Model model, @RequestParam Integer id) throws ResourceNotFoundException {
         Optional<Paciente> pacienteOptional = pacienteService.buscarPorId(id);
         if(pacienteOptional.isPresent()){
             model.addAttribute("especialidad", "Paciente");
@@ -39,7 +40,7 @@ public class VistaController {
     }
 
     @GetMapping("/buscarOdontologo")
-    public String buscarOdontologoPorId(Model model, @RequestParam Integer id){
+    public String buscarOdontologoPorId(Model model, @RequestParam Integer id) throws ResourceNotFoundException {
         Optional<Odontologo> odontologoOptional = odontologoService.buscarPorId(id);
         if(odontologoOptional.isPresent()){
             model.addAttribute("especialidad", "odontologo");

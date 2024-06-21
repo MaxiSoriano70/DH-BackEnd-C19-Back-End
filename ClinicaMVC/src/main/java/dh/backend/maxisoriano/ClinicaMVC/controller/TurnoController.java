@@ -2,6 +2,7 @@ package dh.backend.maxisoriano.ClinicaMVC.controller;
 
 import dh.backend.maxisoriano.ClinicaMVC.Dto.request.TurnoRequestDto;
 import dh.backend.maxisoriano.ClinicaMVC.Dto.response.TurnoResponseDto;
+import dh.backend.maxisoriano.ClinicaMVC.entity.Paciente;
 import dh.backend.maxisoriano.ClinicaMVC.exception.BadRequestException;
 import dh.backend.maxisoriano.ClinicaMVC.exception.ResourceNotFoundException;
 import dh.backend.maxisoriano.ClinicaMVC.service.ITurnoService;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/turno")
@@ -26,18 +28,18 @@ public class TurnoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(turnoADevolver);
     }
     @GetMapping
-    public ResponseEntity<List<TurnoResponseDto>> buscarTodosTurnos(){
+    public ResponseEntity<List<TurnoResponseDto>> buscarTodosTurnos() {
         return ResponseEntity.ok(turnoService.buscarTodos());
     }
     @PutMapping("/{id}")
-    public ResponseEntity<String> modificarTurno(@PathVariable Integer id, @RequestBody TurnoRequestDto turno){
+    public ResponseEntity<String> modificarTurno(@PathVariable Integer id, @RequestBody TurnoRequestDto turno) {
         turnoService.actualizarTurno(id, turno);
-        return ResponseEntity.ok("Turno modificado");
+        return ResponseEntity.ok("{\"message\": \"Turno modificado\"}");
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<String> borrarTurno(@PathVariable Integer id) throws ResourceNotFoundException {
         turnoService.eliminarTurno(id);
-        return ResponseEntity.ok("Turno eliminado.");
+        return ResponseEntity.ok("{\"message\": \"Turno eliminado\"}");
     }
 
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
